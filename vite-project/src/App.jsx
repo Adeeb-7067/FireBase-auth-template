@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Box } from '@mui/material';
+import LandingPage from './components/landingPage';
 
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -17,23 +18,23 @@ const App = () => {
         <Box
           sx={{
             minHeight: '100vh',
-            background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-            padding: 2,
+            padding: 0,
           }}
         >
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <Box sx={{ p: 3 }}>
-                    <h1>Welcome to the Dashboard</h1>
-                  </Box>
-                </PrivateRoute>
-              }
-            />
+            <Route path="/landing" element={
+              <PrivateRoute>
+                <LandingPage />
+              </PrivateRoute>
+            } />
+            {/* Redirect root to landing if authenticated, otherwise to login */}
+            <Route path="/" element={
+              <PrivateRoute>
+                <Navigate to="/landing" replace />
+              </PrivateRoute>
+            } />
           </Routes>
         </Box>
       </Router>

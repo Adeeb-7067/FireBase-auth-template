@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Home } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,7 +21,8 @@ const Login = () => {
       console.log('Login successful:', userCredential.user);
       console.log('User ID:', userCredential.user.uid);
       console.log('Email verified:', userCredential.user.emailVerified);
-      navigate('/');
+      // Navigate to landing page after successful login
+      navigate('/landing');
     } catch (error) {
       console.error('Login error:', {
         code: error.code,
@@ -118,6 +119,7 @@ const Login = () => {
                     }}
                   >
                     Sign in
+                    <Home className="ms-2" size={20} />
                   </Button>
                 </div>
 
