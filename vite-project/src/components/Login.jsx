@@ -4,6 +4,7 @@ import { auth } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { Home } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -60,80 +61,141 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="min-vh-100 d-flex align-items-center" style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    }}>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-vh-100 d-flex align-items-center"
+      style={{
+        background: 'linear-gradient(135deg, #1a73e8 0%, #4285f4 100%)'
+      }}
+    >
       <Container>
         <Row className="justify-content-center">
           <Col xs={12} md={6} lg={5}>
-            <div className="bg-white p-4 p-md-5 rounded-3 shadow-lg">
-              <div className="text-center mb-4">
-                <h2 className="fw-bold mb-2">Welcome Back</h2>
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white p-4 p-md-5 rounded-4 shadow-lg"
+              style={{
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              <motion.div 
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-center mb-4"
+              >
+                <h2 className="fw-bold mb-2" style={{ color: '#1a73e8' }}>Welcome Back</h2>
                 <p className="text-muted">Please sign in to your account</p>
-              </div>
+              </motion.div>
 
               {error && (
-                <Alert variant="danger" className="mb-4">
-                  {error}
-                </Alert>
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                >
+                  <Alert variant="danger" className="mb-4">
+                    {error}
+                  </Alert>
+                </motion.div>
               )}
 
               <Form onSubmit={handleLogin}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      console.log('Email input changed:', e.target.value);
-                    }}
-                    required
-                  />
-                </Form.Group>
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        console.log('Email input changed:', e.target.value);
+                      }}
+                      required
+                      className="rounded-3 border-0"
+                      style={{ 
+                        backgroundColor: '#f8f9fa',
+                        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05)'
+                      }}
+                    />
+                  </Form.Group>
+                </motion.div>
 
-                <Form.Group className="mb-4">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      console.log('Password input changed');
-                    }}
-                    required
-                  />
-                </Form.Group>
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <Form.Group className="mb-4">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        console.log('Password input changed');
+                      }}
+                      required
+                      className="rounded-3 border-0"
+                      style={{ 
+                        backgroundColor: '#f8f9fa',
+                        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.05)'
+                      }}
+                    />
+                  </Form.Group>
+                </motion.div>
 
-                <div className="d-grid">
-                  <Button 
-                    variant="primary" 
-                    type="submit"
-                    size="lg"
-                    className="mb-3"
-                    style={{
-                      background: 'linear-gradient(to right, #667eea, #764ba2)',
-                      border: 'none'
-                    }}
-                  >
-                    Sign in
-                    <Home className="ms-2" size={20} />
-                  </Button>
-                </div>
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="d-grid">
+                    <Button 
+                      variant="primary" 
+                      type="submit"
+                      size="lg"
+                      className="mb-3 rounded-3"
+                      style={{
+                        background: 'linear-gradient(to right, #1a73e8, #4285f4)',
+                        border: 'none',
+                        boxShadow: '0 4px 15px rgba(26, 115, 232, 0.3)'
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      as={motion.button}
+                    >
+                      Sign in
+                      <Home className="ms-2" size={20} />
+                    </Button>
+                  </div>
+                </motion.div>
 
-                <div className="text-center">
-                  <Link to="/register" className="text-decoration-none">
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-center"
+                >
+                  <Link to="/register" className="text-decoration-none" style={{ color: '#1a73e8' }}>
                     Don't have an account? <span className="fw-bold">Sign up</span>
                   </Link>
-                </div>
+                </motion.div>
               </Form>
-            </div>
+            </motion.div>
           </Col>
         </Row>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 

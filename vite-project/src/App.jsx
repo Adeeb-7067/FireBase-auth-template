@@ -22,17 +22,13 @@ const App = () => {
           }}
         >
           <Routes>
+            {/* Default route shows login page */}
+            <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/landing" element={
               <PrivateRoute>
                 <LandingPage />
-              </PrivateRoute>
-            } />
-            {/* Redirect root to landing if authenticated, otherwise to login */}
-            <Route path="/" element={
-              <PrivateRoute>
-                <Navigate to="/landing" replace />
               </PrivateRoute>
             } />
           </Routes>
